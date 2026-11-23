@@ -1,0 +1,6 @@
+__pycache__/
+.godot/
+dist/
+build/
+*.spec
+demo/SELOPackager/

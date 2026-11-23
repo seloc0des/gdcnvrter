@@ -1,0 +1,28 @@
+name: Build desktop pilot
+on: [push, pull_request, workflow_dispatch]
+jobs:
+  desktop:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install -r requirements.txt pyinstaller
+      - run: python -m unittest discover -s tests -v
+      - run: python build.py
+      - run: python -m PyInstaller --onefile --name SELODev-Packager packager.py
+      - run: python tests/fixture.py fixture.unitypackage
+      - name: Inspect fixture with packaged executable
+        shell: bash
+        run: ./dist/SELODev-Packager inspect fixture.unitypackage
+        if: runner.os != 'Windows'
+      - run: .\dist\SELODev-Packager.exe inspect fixture.unitypackage
+        if: runner.os == 'Windows'
+      - uses: actions/upload-artifact@v4
+        with:
+          name: SELODev-Packager-${{ matrix.os }}
+          path: dist/
