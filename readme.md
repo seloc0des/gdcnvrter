@@ -1,5 +1,7 @@
 # SELODev Godot 4.7+ Auto-Packager — Action Plan
 
+[Run the working static-prefab pilot, open the doorway demo, and check supported inputs.](PILOT.md)
+
 > **Target:** `$50–$100/week` pilot hypothesis (`3–6` sales/week) · **Model:** Prototype-First → Free Lite (Single-Prefab Preview) + `$19–$25` One-Time Pro Batch License · **Publisher:** `SELODev`
 
 ## 1. Market Context & Positioning
